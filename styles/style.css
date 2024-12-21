@@ -1,0 +1,184 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  #gameBoard {
+    display: grid;
+    grid-template-columns: repeat(20, 100px);
+    grid-template-rows: repeat(20, 87px);
+    gap: 2px;
+    margin-top: 120px;
+    position: relative;
+  }
+  #tilePreview {
+    margin-left: 50px;
+    width: 100px;
+    height: 116px;
+  }
+
+  .hex {
+    position: relative;
+    width: 100px;
+    height: 116px;
+    background-color: #fff;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .hex .points {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 48px;
+    left: 40px;
+    text-align: center;
+    background-color: green;
+    border-radius: 20px;
+    color: #fff;
+  }
+
+  .hex .number {
+    position: absolute;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    width: 49px;
+    height: 57px; 
+  }
+
+  .hex .number[data-pos="1"] { 
+    left: 50%;
+    top: 0;     
+    clip-path: polygon(0% 0%, 0% 100%, 100% 50%);
+
+  }
+  .hex .number[data-pos="2"] { 
+    left: 50%;
+    top: 25%;     
+    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+
+  }
+  .hex .number[data-pos="3"] { 
+    left: 50%;
+    top: 50%;     
+    clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+
+  }
+  .hex .number[data-pos="4"] { 
+    left: 0%;
+    top: 50%;     
+    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+
+  }
+  .hex .number[data-pos="5"] { 
+    left: 0%;
+    top: 25%;     
+    clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+  }
+  .hex .number[data-pos="6"] { 
+    left: 0%;
+    top: 0%;     
+    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+  }
+  .hex .number[data-pos="1"] .digit {
+    position: absolute;
+    left: 30%;
+    top: 30%;
+  } 
+  .hex .number[data-pos="2"] .digit {
+    position: absolute;
+    right: 20%;
+  } 
+  .hex .number[data-pos="3"] .digit {
+    position: absolute;
+    left: 30%;
+    bottom: 30%;
+  } 
+  .hex .number[data-pos="4"] .digit {
+    position: absolute;
+    right: 30%;
+    bottom: 30%;
+  } 
+  .hex .number[data-pos="5"] .digit {
+    position: absolute;
+    left: 20%;
+  } 
+  .hex .number[data-pos="6"] .digit {
+    position: absolute;
+    right: 30%;
+    top: 30%;
+  } 
+
+  .active{
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .placeholder {
+    position: relative;
+    width: 100px;
+    height: 116px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background-color: #e0e0e0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .placeholder:hover{
+    background-color: #d0d0d0;
+  }
+  .hex.suggestion{
+    opacity: 0.5;
+    cursor: pointer;
+  }
+  .odd-row{
+    margin-left: -51px;
+  }
+
+  .button {
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .button:hover {
+    background-color: #0056b3;
+  }
+
+
+  #menu {
+    position: fixed;
+    top: 0;
+    height: 116px;
+    background-color: #f0f0f0;
+    text-align: center;
+    display: flex;
+    padding: 10px;
+    z-index: 100;
+  }
+  #score {
+    margin-left: 200px;
+    padding-top: 35px;
+  }
+
+  #controls {
+      padding-top: 35px;
+  }
