@@ -12,17 +12,18 @@
 <body>
   <div id="menu">
     <div id="controls">
-      <button class="button" id="drawTile">Draw Tile</button>
       <button class="button" id="endTurn">Give Up</button>
-      <button class="button" id="rotateTileLeft">Rotate Left</button>
-      <button class="button" id="rotateTileRight">Rotate Right</button>
+      <button class="button" id="rotateTileLeft"><div class="arrow">&circlearrowleft;</div></button>
+      <div id="tilePreview"></div>
+      <button class="button" id="rotateTileRight"><div class="arrow">&circlearrowright;</div></button>
       <input type="checkbox" id="cheatMode">Cheat Mode
+      <button class="button" id="superCheat">Super Cheat</button>
     </div>
-    <div id="tilePreview"></div>
     <div id="score">
       <div>
-      <span id="player1" class="active">Player 1</span>: <span id="player1Score">0</span><br> 
-      <span id="player2">Player 2</span>: <span id="player2Score">0</span> 
+        <span id="player1" class="active">Player 1</span>: <span id="player1Score">0 (+0)</span><br> 
+        <span id="player2">Player 2</span>: <span id="player2Score">0 (+0)</span><br> 
+        Turn <span id="currentTurn">0</span>
       </div>
     </div>
   </div>

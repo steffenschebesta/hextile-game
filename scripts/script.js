@@ -2,8 +2,9 @@ const gameBoard = document.getElementById('gameBoard');
 const cheatModeEl = document.getElementById('cheatMode');
 const initialPlaceholder = document.getElementById('initialPlaceholder');
 const tilePreview = document.getElementById('tilePreview');
-const drawTileButton = document.getElementById('drawTile');
 const endTurnButton = document.getElementById('endTurn');
+const superCheatButton = document.getElementById('superCheat');
+const currentTurnEl = document.getElementById('currentTurn');
 const rotateTileRightButton = document.getElementById('rotateTileRight');
 const rotateTileLeftButton = document.getElementById('rotateTileLeft');
 const player1ScoreEl = document.getElementById('player1Score');
@@ -17,10 +18,12 @@ const startTile = {
   numbers: [1, 2, 3, 4, 5, 6]
 }
 const tileNumberPool = [1, 2, 3, 4, 5, 6];
+const targetScore = 101;
 let cheatMode = false;
 let placedTiles = [];
 
-let currentPlayer = 1;
+let currentPlayer = 2; // will be switched to 1 in init
+let currentTurn = 0;
 let player1Score = 0;
 let player2Score = 0;
 let currentTile = null;
@@ -181,7 +184,6 @@ function suggestMove(row, col, placeholder) {
       placeTile(row, col, suggestionTile);
     });
   }
-  //debugger;
 }
 
 function validatePlacement(row, col, tileNumbers) {
@@ -252,6 +254,8 @@ function calculateScore(matchingEdges, matchingEdgesNumbers) {
 function endTurn() {
   const placeholders = document.querySelectorAll('.placeholder');
   placeholders.forEach(placeholder => placeholder.remove());
+  const suggestions = document.querySelectorAll('.suggestion');
+  suggestions.forEach(suggestion => suggestion.remove());
   tilePreview.innerHTML = '';
   currentPlayer = currentPlayer === 1 ? 2 : 1;
   if (currentPlayer === 1) {
@@ -262,7 +266,17 @@ function endTurn() {
     player2El.classList.add('active');
     player1El.classList.remove('active');
   }
-
+  if (player1Score >= targetScore || player2Score >= targetScore) {
+    let winner = player1Score >= targetScore ? 'Player 1' : 'Player 2';
+    alert(`${winner} wins in ${currentTurn} turns!`);
+  }
+  else {
+    drawTile();
+    if (currentPlayer === 1) {
+      currentTurn++;
+      currentTurnEl.innerText = currentTurn;
+    }
+  } 
 }
 
 function rotateTileRight() {
@@ -299,7 +313,7 @@ function init() {
   placeTile(startTile.row, startTile.col, initialPlaceholder, firstTile);
 }
 
-drawTileButton.addEventListener('click', () => {
+function drawTile(){
   if (currentTile) return;
 
   const { tile, numbers } = generateTile();
@@ -307,7 +321,7 @@ drawTileButton.addEventListener('click', () => {
   currentTileNumbers = numbers;
   highlightValidPlacements();
   tilePreview.appendChild(tile);
-});
+}
 
 endTurnButton.addEventListener('click', () => {
   if (currentTile) {
@@ -315,6 +329,13 @@ endTurnButton.addEventListener('click', () => {
     currentTile = null;
   }
   endTurn();
+});
+
+superCheatButton.addEventListener('click', () => {
+  const ph = document.querySelectorAll('.placeholder');
+  ph.forEach(function(p){
+    suggestMove(parseInt(p.dataset.row), parseInt(p.dataset.col), p);
+  });
 });
 
 rotateTileRightButton.addEventListener('click', rotateTileRight);
